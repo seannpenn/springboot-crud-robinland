@@ -1,19 +1,25 @@
 package com.robinland.pos.RobinlandPos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "User")
+@Table(name = "user")
 @Builder
 @Getter
 @Setter
 public class User extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +31,8 @@ public class User extends Auditable {
     private String middleName;
 
     private String lastName;
+
+    private String userName;
 
     @Column(columnDefinition = "TINYINT(1)")
     @JsonProperty("isActive")
@@ -54,4 +62,12 @@ public class User extends Auditable {
     @Column(length = 16)
     private String tin;
 
+    @OneToMany(mappedBy = "user",
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
+            }, fetch = FetchType.LAZY)
+    @JsonBackReference()
+    private List<UserRole> roles = new ArrayList<>();
 }
