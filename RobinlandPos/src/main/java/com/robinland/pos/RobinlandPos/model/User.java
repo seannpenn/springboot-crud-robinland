@@ -2,13 +2,9 @@ package com.robinland.pos.RobinlandPos.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -17,8 +13,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@Data
-public class User {
+public class User extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,7 +48,7 @@ public class User {
     @Column(length = 16)
     private String fax;
 
-    @Column(length = 64)
+    @Column(length = 64, unique = true)
     private String email;
 
     @Column(length = 16)
