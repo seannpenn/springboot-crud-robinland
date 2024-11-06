@@ -1,7 +1,7 @@
 package com.robinland.pos.RobinlandPos.functions.user.controller;
 
 import com.robinland.pos.RobinlandPos.functions.user.dto.UserRequestDto;
-import com.robinland.pos.RobinlandPos.functions.user.service.UserService;
+import com.robinland.pos.RobinlandPos.functions.user.service.UserServiceInterface;
 import com.robinland.pos.RobinlandPos.model.ApiResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceInterface userService;
 
     @GetMapping("all")
     @ResponseStatus(HttpStatus.OK)
