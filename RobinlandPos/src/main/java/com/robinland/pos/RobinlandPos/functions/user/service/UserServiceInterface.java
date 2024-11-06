@@ -12,7 +12,11 @@ public interface UserServiceInterface {
 
     public List<User> getAllUsers();
 
-    public Optional<User> getUser(Long userId);
+    public Optional<User> getUser(Long userId)  throws Exception;
 
-    public User addUser(UserRequestDto requestDto);
+    public User addUser(UserRequestDto requestDto) throws Exception;
+
+    public User updateUser(Long id, UserRequestDto requestDto) throws Exception;
+
+    void deleteUser(Long id) throws Exception;
 }
