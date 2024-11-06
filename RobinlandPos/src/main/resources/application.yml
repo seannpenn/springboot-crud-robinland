@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    name: dev-server
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/robin_db
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: 'false'
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+server:
+  servlet:
+    context-path: /robin/api
+    session:
+      cookie:
+        http-only: true
+        same-site: strict
+  port: 8070
