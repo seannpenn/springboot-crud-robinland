@@ -3,6 +3,7 @@ package com.robinland.pos.RobinlandPos.security;
 import com.robinland.pos.RobinlandPos.functions.role.service.RoleService;
 import com.robinland.pos.RobinlandPos.functions.user.repository.UserRepository;
 import com.robinland.pos.RobinlandPos.model.Role;
+import com.robinland.pos.RobinlandPos.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,15 +36,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new User(user.getUserName(), user.getPassword(), mapRolesToAuthorities(mapToRoles(user)));
     }
 
-    private List<Role> mapToRoles(com.robinland.pos.RobinlandPos.model.User user){
-        List<Role> mappedRoles = new ArrayList<>();
-        if(!ObjectUtils.isEmpty(user.getRoles())) {
-            user.getRoles().stream().map(userRole ->
-                    mappedRoles.add(userRole.getRole())
-            );
-        }
-
-        return mappedRoles;
+    private List<Role> mapToRoles(com.robinland.pos.RobinlandPos.model.User user) {
+        return user.getRoles().stream()
+                .map(UserRole::getRole)
+                .collect(Collectors.toList());
     }
 
     private Collection<GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
