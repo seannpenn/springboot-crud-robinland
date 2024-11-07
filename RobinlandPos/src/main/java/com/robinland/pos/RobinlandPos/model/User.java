@@ -15,7 +15,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
-@Builder
 @Getter
 @Setter
 public class User extends Auditable {
